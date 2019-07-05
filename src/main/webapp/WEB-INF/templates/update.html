@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        table {
+            margin: 50px auto 0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            vertical-align: center;
+        }
+        table, tr, td {
+            border: 1px solid black;
+        }
+        tr, td {
+            width: 100px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<form action="updates" method="post">
+    <table>
+        <tr>
+            <td>empno</td><td>ename</td><td>job</td><td>mgr</td>
+            <td>hiredate</td><td>sal</td><td>com</td><td>deptno</td>
+        </tr>
+        <tr>
+            <td  ><input type="text" name="empno"  th:value="${emp.empno}"></td>
+            <td  ><input type="text" name="ename"  th:value="${emp.ename}"></td>
+            <td ><input type="text" name="job" th:value="${emp.job}"></td>
+            <td  ><input type="text" name="mgr"  th:value="${emp.mgr}"></td>
+            <td  ><input type="text" name="hiredate"  th:value="${emp.hiredate}"></td>
+            <td ><input type="text" name="sal"  th:value="${emp.sal}"></td>
+            <td  ><input type="text" name="com"  th:value="${emp.com}"></td>
+            <td  ><input type="text" name="deptno"  th:value="${emp.deptno}"></td>
+        </tr>
+        <button type="submit">更新</button>
+    </table>
+</form>
+</body>
+</html>

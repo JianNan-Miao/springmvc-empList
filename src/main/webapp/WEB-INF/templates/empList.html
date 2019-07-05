@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    table {
+    margin: 50px auto 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: center;
+    }
+    table, tr, td {
+    border: 1px solid black;
+    }
+    tr, td {
+    width: 100px;
+    height: 30px;
+    }
+    #header {
+    height: 50px;
+    text-align: right;
+    }
+
+    #avatar {
+    width: 45px;
+    height: 45px;
+    margin-right: 20px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<body>
+<div id="header">
+    <img id="avatar"  th:src="@{/imgs/{avatars}(avatars=${users.avatar})}"><a id="user" th:text="${users.username}">欢迎您</a><a href="servlet/LogoutServlet">Logout</a>
+
+</div>
+  <table>
+      <tr>
+          <td>empno</td>
+          <td>ename</td>
+          <td>job</td>
+          <td>mgr</td>
+          <td>hiredate</td>
+          <td>sal</td>
+          <td>com</td>
+          <td>deptno</td>
+          <td>delete</td>
+          <td>update</td>
+      </tr>
+      <tr th:each="emp: ${list}">
+          <td th:text="${emp.empno}"></td>
+          <td th:text="${emp.ename}"></td>
+          <td th:text="${emp.job}"></td>
+          <td th:text="${emp.mgr}"></td>
+          <td th:text="${emp.hiredate}"></td>
+          <td th:text="${emp.sal}"></td>
+          <td th:text="${emp.com}"></td>
+          <td th:text="${emp.deptno}"></td>
+          <td><a th:href="@{/delete(empno=${emp.empno})}">删除</a></td>
+          <td ><a th:href="@{/update(empno=${emp.empno})}">修改</a></td>
+
+      </tr>
+  </table>
+</body>
+</html>

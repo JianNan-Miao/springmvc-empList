@@ -9,12 +9,14 @@ import com.cheer.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +51,8 @@ public class UserController {
     }
 
     @PostMapping("regist")
-    public  String regist(User user, MultipartFile upload,HttpServletRequest request) throws Exception {
+    public  String regist(User user, MultipartFile upload, HttpServletRequest request) throws Exception {
+
         String pic_path=null;
         String originalFilename = upload.getOriginalFilename();
         if(upload!=null&&originalFilename!=null){
@@ -79,16 +82,24 @@ public class UserController {
 
     @PostMapping("login")
     public String login(User user, HttpSession session, Model model){
-        User user1 = userService.getUser(user.getUsername(), user.getPassword());
-        System.out.println(user1);
-        if(user1==null){
+        User users = userService.getUser(user.getUsername(), user.getPassword());
+        System.out.println(users);
+        if(users==null){
             return "login";
         }else{
-            session.setAttribute("user1",user1);
+            session.setAttribute("users",users);
+            model.addAttribute("users",users);
             List<Emp> list = empService.getEmp();
             model.addAttribute("list",list);
             return "empList";
         }
+    }
+
+    @RequestMapping("test")
+    public  String test(Model model){
+        Emp emp = empService.findEmp(7788);
+        model.addAttribute("emp",emp);
+        return "test";
     }
 
 
